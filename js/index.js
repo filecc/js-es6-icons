@@ -168,7 +168,80 @@
       family: "solid",
       color: "blue",
     },
+    {
+      name: "address-book",
+      prefix: "fa-",
+      type: "address",
+      family: "solid",
+      color: "blue"
+    },
+    {
+      name: "calendar",
+      prefix: "fa-",
+      type: "calendar",
+      family: "solid",
+      color: "blue"
+    },
+    {
+      name: "camera-retro",
+      prefix: "fa-",
+      type: "camera",
+      family: "solid",
+      color: "blue"
+    },
+    {
+      name: "car",
+      prefix: "fa-",
+      type: "car",
+      family: "solid",
+      color: "red"
+    },
+    {
+      name: "book",
+      prefix: "fa-",
+      type: "book",
+      family: "solid",
+      color: "green"
+    },
+    {
+      name: "globe-americas",
+      prefix: "fa-",
+      type: "globe",
+      family: "solid",
+      color: "green"
+    },
+    {
+      name: "music",
+      prefix: "fa-",
+      type: "music",
+      family: "solid",
+      color: "purple"
+    },
+    {
+      name: "gamepad",
+      prefix: "fa-",
+      type: "game",
+      family: "solid",
+      color: "purple"
+    },
+    {
+      name: "coffee",
+      prefix: "fa-",
+      type: "food",
+      family: "solid",
+      color: "brown"
+    },
+    {
+      name: "pizza-slice",
+      prefix: "fa-",
+      type: "food",
+      family: "solid",
+      color: "brown"
+    },
   ];
+
+  
+  
 
   function createCol(icon) {
     const { name, prefix, type, family, color } = icon;
@@ -213,13 +286,14 @@
   });
 
   function search(value) {
+    
     const searched = icons.filter(
       (icon) =>
         icon.type.includes(value.toLowerCase()) ||
         icon.name.includes(value.toLowerCase())
     );
     root.textContent = "";
-    const setToDisplay = value === "all" || value === "" ? icons : searched;
+    const setToDisplay = (value.lenght === 0) ? icons : searched;
     if (searched.length === 0) {
       root.appendChild(createChild('span', {classes: ['text-danger', 'text-center', 'p-5'], text: 'No result'}));
     } else {
@@ -233,6 +307,7 @@
   select.addEventListener("change", function () {
     const indexSelected = this.selectedIndex;
     const opstionSelected = select.options[indexSelected].value;
+    console.log(opstionSelected)
     search(opstionSelected);
   });
 
