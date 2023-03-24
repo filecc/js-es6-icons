@@ -285,13 +285,26 @@
     root.appendChild(createCol(icon));
   });
 
-  function search(value) {
+  function search(value, origin) {
     
-    const searched = icons.filter(
-      (icon) =>
-        icon.type.includes(value.toLowerCase()) ||
-        icon.name.includes(value.toLowerCase())
-    );
+    function originSet(){
+      let result;
+      if (origin === 'select'){
+        result = icons.filter(
+          (icon) =>
+            icon.type.includes(value.toLowerCase())
+        );
+      } else {
+        result = icons.filter(
+          (icon) =>
+            icon.type.includes(value.toLowerCase()) ||
+            icon.name.includes(value.toLowerCase())
+        );
+      }
+      return result
+    }
+    
+    const searched = originSet();
     root.textContent = "";
     const setToDisplay = (value.lenght === 0) ? icons : searched;
     if (searched.length === 0) {
@@ -308,13 +321,13 @@
     const indexSelected = this.selectedIndex;
     const opstionSelected = select.options[indexSelected].value;
     console.log(opstionSelected)
-    search(opstionSelected);
+    search(opstionSelected, 'select');
   });
 
   const input = document.querySelector("input");
   input.addEventListener("input", function () {
     const value = this.value;
-    search(value);
+    search(value, 'input');
   });
   
 })();
