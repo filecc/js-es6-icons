@@ -54,32 +54,6 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-// function to manage search filter on a list using a event listner input
-// restituisce SOLO keyToMatch passato
-const handleSearch = (
-  // restituisce SOLO keyToMatch passato
-  arrayToFilter,
-  keyToMatch,
-  keyToShow,
-  source,
-  listToUpdate,
-  itemToCreate,
-) => {
-  const searched = arrayToFilter.filter((element) => element[keyToMatch]
-    .toString()
-    .toLowerCase()
-    .includes(source.value.toLowerCase()));
-  const arraySearched = searched.length
-    ? searched.map((item) => createChild(
-      itemToCreate,
-      '',
-      '',
-      `${item[keyToMatch]} - ${item[keyToShow]}`,
-    ))
-    : [createChild(itemToCreate, '', '', 'no result')];
-
-  listToUpdate.replaceChildren(...arraySearched);
-};
 
 const icons = [
   {
@@ -232,3 +206,26 @@ typeSelectable.forEach(element => {
 icons.forEach(icon => {
   root.appendChild(createCol(icon));
 });
+
+function search(value){
+  console.log(value)
+  const searched = icons.filter(icon => ((icon.type).includes(value.toLowerCase()) || (icon.name).includes(value.toLowerCase())));
+  root.textContent = '';
+  const setToDisplay = (value === 'all' || value === '') ? icons : searched;
+  setToDisplay.forEach(icon => {
+    root.appendChild(createCol(icon));
+  });
+}
+
+
+select.addEventListener('change', function() {
+  const indexSelected = this.selectedIndex;
+  const opstionSelected = select.options[indexSelected].value;
+  search(opstionSelected);  
+});
+
+const input = document.querySelector('input');
+input.addEventListener('input', function() {
+  const value = this.value;
+  search(value)
+})
