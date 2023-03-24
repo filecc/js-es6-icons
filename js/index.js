@@ -174,7 +174,7 @@
     const { name, prefix, type, family, color } = icon;
 
     const col = createChild("div", {
-      classes: ["col-12", "p-4"],
+      classes: ["col-12", 'col-md-6', 'col-lg-3', "p-4"],
       "data-fg-type": type,
     });
     const card = createChild("div", { classes: ["cardIcon"] });
@@ -221,7 +221,7 @@
     root.textContent = "";
     const setToDisplay = value === "all" || value === "" ? icons : searched;
     if (searched.length === 0) {
-      root.appendChild(createChild('span', {classes: ['text-danger', 'text-center'], text: 'No result'}));
+      root.appendChild(createChild('span', {classes: ['text-danger', 'text-center', 'p-5'], text: 'No result'}));
     } else {
       setToDisplay.forEach((icon) => {
         root.appendChild(createCol(icon));
