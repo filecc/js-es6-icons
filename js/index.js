@@ -285,26 +285,26 @@
     root.appendChild(createCol(icon));
   });
 
-  function search(value, origin) {
-    
-    function originSet(){
-      let result;
-      if (origin === 'select'){
-        result = icons.filter(
-          (icon) =>
-            icon.type.includes(value.toLowerCase())
-        );
-      } else {
-        result = icons.filter(
-          (icon) =>
-            icon.type.includes(value.toLowerCase()) ||
-            icon.name.includes(value.toLowerCase())
-        );
-      }
-      return result
+  function originSet(value, origin){
+    let result;
+    if (origin === 'select'){
+      result = icons.filter(
+        (icon) =>
+          icon.type.includes(value.toLowerCase())
+      );
+    } else {
+      result = icons.filter(
+        (icon) =>
+          icon.type.includes(value.toLowerCase()) ||
+          icon.name.includes(value.toLowerCase())
+      );
     }
+    return result
+  }
+
+  function search(value, origin) {    
     
-    const searched = originSet();
+    const searched = originSet(value, origin);
     root.textContent = "";
     const setToDisplay = (value.lenght === 0) ? icons : searched;
     if (searched.length === 0) {
