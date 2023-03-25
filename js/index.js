@@ -251,20 +251,14 @@
     return hexColor
   }
   
-  randomColor();
 
   const typeSelectable = [];
   const typeColor = []
 
-  icons.map((icon, index) => {
-    if (index === 0) {
-      typeSelectable.push(icon.type);
-      typeColor.push(
-        {type: icon.type, color: randomColor()}
-      )
-    } else if (!typeSelectable.includes(icon.type)) {
-      typeColor.push({type: icon.type, color: randomColor()})
-      typeSelectable.push(icon.type);
+  icons.map((item) => {
+    if (!typeSelectable.includes(item.type)) {
+      typeColor.push({type: item.type, color: randomColor()})
+      typeSelectable.push(item.type);
     }
   });
 
@@ -272,7 +266,6 @@
     const { name, prefix, type, family, color } = icon;
 
     const col = createChild("div", {
-      /* , "col-12", 'col-md-6', 'col-lg-3' */
       classes: ['col', "p-4"],
       "data-fg-type": type,
     });
@@ -288,15 +281,13 @@
         iconImage.style.color = element.color;
       }
     });
-    
 
     return col;
   }
 
   const root = document.getElementById("root");
   const select = document.getElementById("typeSelector");
-
-  
+  const input = document.querySelector("input");
 
   typeSelectable.forEach((element) => {
     select.appendChild(
@@ -347,7 +338,6 @@
     search(opstionSelected, 'select');
   });
 
-  const input = document.querySelector("input");
   input.addEventListener("input", function () {
     const value = this.value;
     search(value, 'input');
