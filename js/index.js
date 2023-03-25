@@ -241,7 +241,57 @@
   ];
 
   
+  function randomColor() {
+   
+    let hexColor = "#";
+    while (hexColor.length < 7) {
+      const randomNumber = getRandomInt(0, 15);
+      if (randomNumber < 10) {
+        hexColor += randomNumber;
+      } else {
+        switch (randomNumber) {
+          case 10:
+            hexColor += "A";
+            break;
+          case 11:
+            hexColor += "B";
+            break;
+          case 12:
+            hexColor += "C";
+            break;
+          case 13:
+            hexColor += "D";
+            break;
+          case 14:
+            hexColor += "E";
+            break;
+          case 15:
+            hexColor += "F";
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return hexColor;
+  }
   
+  randomColor();
+
+  const typeSelectable = [];
+  const typeColor = []
+
+  icons.map((icon, index) => {
+    if (index === 0) {
+      typeSelectable.push(icon.type);
+      typeColor.push(
+        {type: icon.type, color: randomColor()}
+      )
+    } else if (!typeSelectable.includes(icon.type)) {
+      typeColor.push({type: icon.type, color: randomColor()})
+      typeSelectable.push(icon.type);
+    }
+  });
 
   function createCol(icon) {
     const { name, prefix, type, family, color } = icon;
@@ -257,7 +307,12 @@
     });
     const iconName = createChild("p", { text: name });
     card.append(iconImage, iconName);
-    iconImage.style.color = color;
+    typeColor.forEach(element => {
+      if (element.type === icon.type){
+        iconImage.style.color = element.color;
+      }
+    });
+    
 
     return col;
   }
@@ -265,15 +320,7 @@
   const root = document.getElementById("root");
   const select = document.getElementById("typeSelector");
 
-  const typeSelectable = [];
-
-  icons.map((icon, index) => {
-    if (index === 0) {
-      typeSelectable.push(icon.type);
-    } else if (!typeSelectable.includes(icon.type)) {
-      typeSelectable.push(icon.type);
-    }
-  });
+  
 
   typeSelectable.forEach((element) => {
     select.appendChild(
