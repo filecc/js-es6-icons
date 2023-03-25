@@ -245,7 +245,8 @@
    
     let hexColor = "#";
     while (hexColor.length < 7) {
-    hexColor += (getRandomInt(0, 15).toString(16))
+      if (hexColor.length < 6) {hexColor += (getRandomInt(0, 15).toString(16))}
+      else if (hexColor.length >= 6)  {hexColor += (getRandomInt(2, 10).toString(16))} /* never white or pure black */
     }
     
     return hexColor
