@@ -272,7 +272,8 @@
     const { name, prefix, type, family, color } = icon;
 
     const col = createChild("div", {
-      classes: ["col-12", 'col-md-6', 'col-lg-3', "p-4"],
+      /* , "col-12", 'col-md-6', 'col-lg-3' */
+      classes: ['col', "p-4"],
       "data-fg-type": type,
     });
     const card = createChild("div", { classes: ["cardIcon"] });
