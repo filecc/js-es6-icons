@@ -245,35 +245,10 @@
    
     let hexColor = "#";
     while (hexColor.length < 7) {
-      const randomNumber = getRandomInt(0, 15);
-      if (randomNumber < 10) {
-        hexColor += randomNumber;
-      } else {
-        switch (randomNumber) {
-          case 10:
-            hexColor += "A";
-            break;
-          case 11:
-            hexColor += "B";
-            break;
-          case 12:
-            hexColor += "C";
-            break;
-          case 13:
-            hexColor += "D";
-            break;
-          case 14:
-            hexColor += "E";
-            break;
-          case 15:
-            hexColor += "F";
-            break;
-          default:
-            break;
-        }
-      }
+    hexColor += (getRandomInt(0, 15).toString(16))
     }
-    return hexColor;
+    
+    return hexColor
   }
   
   randomColor();
